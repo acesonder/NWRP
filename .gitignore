@@ -43,3 +43,6 @@ Thumbs.db
 *.tmp
 *.bak
 /tmp/
+
+# Web app configuration (contains credentials)
+proposals/webapp/config/database.php

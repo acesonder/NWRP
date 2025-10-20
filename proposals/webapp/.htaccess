@@ -1,0 +1,76 @@
+# Warming Room Proposal System - Apache Configuration
+
+# Enable rewrite engine
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteBase /proposals/webapp/
+</IfModule>
+
+# Deny access to config directory
+<FilesMatch "^(database\.php|database\.example\.php)$">
+    Order deny,allow
+    Deny from all
+</FilesMatch>
+
+# Deny access to SQL files (prevent downloading database schema)
+<FilesMatch "\.sql$">
+    Order deny,allow
+    Deny from all
+</FilesMatch>
+
+# Deny access to README in production (optional)
+# <FilesMatch "^README\.md$">
+#     Order deny,allow
+#     Deny from all
+# </FilesMatch>
+
+# Security headers
+<IfModule mod_headers.c>
+    Header set X-Content-Type-Options "nosniff"
+    Header set X-Frame-Options "SAMEORIGIN"
+    Header set X-XSS-Protection "1; mode=block"
+</IfModule>
+
+# Disable directory browsing
+Options -Indexes
+
+# Set default charset
+AddDefaultCharset UTF-8
+
+# Set default timezone (adjust as needed)
+<IfModule mod_php7.c>
+    php_value date.timezone "America/Toronto"
+</IfModule>
+
+# Error pages (optional - uncomment to use)
+# ErrorDocument 404 /proposals/webapp/404.php
+# ErrorDocument 500 /proposals/webapp/500.php
+
+# PHP settings (adjust as needed)
+<IfModule mod_php7.c>
+    # Maximum execution time
+    php_value max_execution_time 300
+    
+    # Maximum upload size
+    php_value upload_max_filesize 10M
+    php_value post_max_size 10M
+    
+    # Memory limit
+    php_value memory_limit 128M
+</IfModule>
+
+# Compression (if mod_deflate is available)
+<IfModule mod_deflate.c>
+    AddOutputFilterByType DEFLATE text/html text/plain text/xml text/css text/javascript application/javascript
+</IfModule>
+
+# Browser caching for static files
+<IfModule mod_expires.c>
+    ExpiresActive On
+    ExpiresByType text/css "access plus 1 month"
+    ExpiresByType application/javascript "access plus 1 month"
+    ExpiresByType image/png "access plus 1 year"
+    ExpiresByType image/jpg "access plus 1 year"
+    ExpiresByType image/jpeg "access plus 1 year"
+    ExpiresByType image/gif "access plus 1 year"
+</IfModule>
