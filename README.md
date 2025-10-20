@@ -18,6 +18,8 @@ The warming room is a critical community service providing shelter and warmth du
 
 ### 📚 Comprehensive Documentation
 
+**[📖 Documentation Index](docs/INDEX.md)** - Complete guide to all documentation
+
 - **[Web App Overview](docs/WEB_APP_OVERVIEW.md)** - Complete summary of the proposed web application
 - **[Web App Features](docs/WEB_APP_FEATURES.md)** - Detailed feature specifications and requirements
 - **[Services & Resources](docs/SERVICES_AND_RESOURCES.md)** - Extensive list of services for homelessness, addiction, and mental health support
