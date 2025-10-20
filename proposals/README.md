@@ -2,7 +2,28 @@
 
 This directory is for detailed warming room proposals and ideas.
 
-## How to Add a Proposal
+## 🌐 Web Application
+
+A complete web-based proposal management system is now available in the `webapp/` directory!
+
+**Features:**
+- 📝 Submit and manage proposals through a web interface
+- 💬 Comment and discuss proposals
+- 🎨 Modern, responsive design
+- 🔧 Easy installation and configuration
+- 🗄️ MySQL database backend
+
+**Quick Start:**
+```bash
+cd webapp/
+# Follow instructions in install.php or see docs/SETUP.md
+```
+
+**Access:** Navigate to `http://your-domain/proposals/webapp/` after installation.
+
+**Documentation:** See [webapp/README.md](webapp/README.md) for complete details.
+
+## How to Add a Proposal (Markdown Method)
 
 1. Create a new markdown file (e.g., `volunteer-coordination-system.md`)
 2. Use the proposal template from [BRAINSTORMING.md](../BRAINSTORMING.md)
