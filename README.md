@@ -30,6 +30,8 @@ See [docs/TOOL_USAGE.md](docs/TOOL_USAGE.md) for detailed usage instructions.
 
 ## Getting Started
 
+**New here?** Check out the [Quick Start Guide](QUICK_START.md) for a fast introduction!
+
 1. Read through the [BRAINSTORMING.md](BRAINSTORMING.md) to see current ideas
 2. Check [CONTRIBUTING.md](CONTRIBUTING.md) for how to participate
 3. Use the warming room status tool to stay informed about activations
