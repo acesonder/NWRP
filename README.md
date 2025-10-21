@@ -16,6 +16,16 @@ The warming room is a critical community service providing shelter and warmth du
 - [Contributing Guide](CONTRIBUTING.md) - Learn how to contribute
 - [Warming Room Status Tool](#warming-room-status-tool) - Utility for checking activation status
 
+### 📚 Comprehensive Documentation
+
+**[📖 Documentation Index](docs/INDEX.md)** - Complete guide to all documentation
+
+- **[Web App Overview](docs/WEB_APP_OVERVIEW.md)** - Complete summary of the proposed web application
+- **[Web App Features](docs/WEB_APP_FEATURES.md)** - Detailed feature specifications and requirements
+- **[Services & Resources](docs/SERVICES_AND_RESOURCES.md)** - Extensive list of services for homelessness, addiction, and mental health support
+- **[Warming Room Toolkit](docs/WARMING_ROOM_TOOLKIT.md)** - Complete management toolkit for winter warming rooms
+- **[Implementation Roadmap](docs/IMPLEMENTATION_ROADMAP.md)** - Phased development plan with timeline and budget
+
 ## Warming Room Status Tool
 
 A simple utility to check and manage warming room activation status.
