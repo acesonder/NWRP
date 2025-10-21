@@ -1,0 +1,67 @@
+# Coordination System - Apache Configuration
+
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    
+    # Force HTTPS in production
+    # RewriteCond %{HTTPS} off
+    # RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+    
+    # API routing - route /api/endpoint to /api/endpoint.php
+    RewriteRule ^api/([^/]+)/?$ api/$1.php [QSA,L]
+    
+    # Handle API with parameters - /api/endpoint/123 to /api/endpoint.php
+    RewriteRule ^api/([^/]+)/(.+)$ api/$1.php [QSA,L]
+    
+    # Default document
+    DirectoryIndex index.html
+</IfModule>
+
+# Security headers
+<IfModule mod_headers.c>
+    Header always set X-Content-Type-Options nosniff
+    Header always set X-Frame-Options DENY
+    Header always set X-XSS-Protection "1; mode=block"
+    Header always set Referrer-Policy "strict-origin-when-cross-origin"
+    
+    # HSTS (uncomment for production with SSL)
+    # Header always set Strict-Transport-Security "max-age=63072000; includeSubDomains; preload"
+</IfModule>
+
+# Deny access to sensitive directories
+<Directory "*/config">
+    Require all denied
+</Directory>
+
+<Directory "*/database">
+    Require all denied
+</Directory>
+
+<Directory "*/includes">
+    Require all denied
+</Directory>
+
+# Cache static assets
+<IfModule mod_expires.c>
+    ExpiresActive On
+    ExpiresByType text/css "access plus 1 month"
+    ExpiresByType application/javascript "access plus 1 month"
+    ExpiresByType image/png "access plus 1 month"
+    ExpiresByType image/jpg "access plus 1 month"
+    ExpiresByType image/jpeg "access plus 1 month"
+    ExpiresByType image/gif "access plus 1 month"
+</IfModule>
+
+# Compress text files
+<IfModule mod_deflate.c>
+    AddOutputFilterByType DEFLATE text/plain
+    AddOutputFilterByType DEFLATE text/html
+    AddOutputFilterByType DEFLATE text/xml
+    AddOutputFilterByType DEFLATE text/css
+    AddOutputFilterByType DEFLATE application/xml
+    AddOutputFilterByType DEFLATE application/xhtml+xml
+    AddOutputFilterByType DEFLATE application/rss+xml
+    AddOutputFilterByType DEFLATE application/javascript
+    AddOutputFilterByType DEFLATE application/x-javascript
+    AddOutputFilterByType DEFLATE application/json
+</IfModule>

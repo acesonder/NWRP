@@ -7,9 +7,30 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+    <!-- NWRP Navigation -->
+    <div class="nwrp-nav-bar" style="background: #2563eb; color: white; padding: 0.75rem 1rem; font-family: Inter, sans-serif;">
+        <div style="display: flex; justify-content: space-between; align-items: center; max-width: 1200px; margin: 0 auto;">
+            <div style="display: flex; align-items: center; gap: 1rem;">
+                <span style="font-size: 1.5rem;">🏠</span>
+                <span style="font-weight: 600;">NWRP Portal</span>
+            </div>
+            <nav style="display: flex; gap: 1rem; align-items: center;">
+                <a href="../../" style="color: white; text-decoration: none; padding: 0.5rem 1rem; border-radius: 6px;">
+                    � Main Portal
+                </a>
+                <a href="../../coordination-system/" style="color: white; text-decoration: none; padding: 0.5rem 1rem; border-radius: 6px;">
+                    👥 Coordination
+                </a>
+                <a href="./" style="color: white; text-decoration: none; padding: 0.5rem 1rem; border-radius: 6px; background: rgba(255,255,255,0.2);">
+                    💡 Proposals
+                </a>
+            </nav>
+        </div>
+    </div>
+
     <header>
         <div class="container">
-            <h1>🏠 Warming Room Proposal System</h1>
+            <h1>💡 Community Proposals System</h1>
             <nav>
                 <ul>
                     <li><a href="index.php">Home</a></li>

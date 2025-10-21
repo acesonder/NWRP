@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Volunteer Coordination System</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="js/main.js" defer></script>
+</head>
+<body>
+    <!-- NWRP Navigation -->
+    <div class="nwrp-nav-bar" style="background: #2563eb; color: white; padding: 0.75rem 1rem; font-family: Inter, sans-serif;">
+        <div style="display: flex; justify-content: space-between; align-items: center; max-width: 1200px; margin: 0 auto;">
+            <div style="display: flex; align-items: center; gap: 1rem;">
+                <span style="font-size: 1.5rem;">🏠</span>
+                <span style="font-weight: 600;">NWRP Portal</span>
+            </div>
+            <nav style="display: flex; gap: 1rem; align-items: center;">
+                <a href="../" style="color: white; text-decoration: none; padding: 0.5rem 1rem; border-radius: 6px;">
+                    🌟 Main Portal
+                </a>
+                <a href="./" style="color: white; text-decoration: none; padding: 0.5rem 1rem; border-radius: 6px; background: rgba(255,255,255,0.2);">
+                    👥 Coordination
+                </a>
+                <a href="../proposals/webapp/" style="color: white; text-decoration: none; padding: 0.5rem 1rem; border-radius: 6px;">
+                    💡 Proposals
+                </a>
+            </nav>
+        </div>
+    </div>
+
+    <div id="app">
+        <header>
+            <nav class="navbar">
+                <div class="nav-brand">
+                    <h1>👥 Volunteer Coordination System</h1>
+                </div>
+                <div class="nav-menu">
+                    <a href="#dashboard" class="nav-link active" data-section="dashboard">Dashboard</a>
+                    <a href="#volunteers" class="nav-link" data-section="volunteers">Volunteers</a>
+                    <a href="#scheduling" class="nav-link" data-section="scheduling">Scheduling</a>
+                    <a href="#communications" class="nav-link" data-section="communications">Communications</a>
+                    <a href="#reports" class="nav-link" data-section="reports">Reports</a>
+                </div>
+            </nav>
+        </header>
+
+        <main class="main-content">
+            <!-- Dashboard Section -->
+            <section id="dashboard-section" class="content-section active">
+                <div class="page-header">
+                    <h2>Dashboard</h2>
+                    <div class="header-actions">
+                        <button class="btn btn-primary" onclick="showActivationForm()">
+                            New Activation
+                        </button>
+                    </div>
+                </div>
+
+                <div class="dashboard-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon">👥</div>
+                        <div class="stat-content">
+                            <h3 id="active-volunteers">0</h3>
+                            <p>Active Volunteers</p>
+                        </div>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <div class="stat-icon">📅</div>
+                        <div class="stat-content">
+                            <h3 id="upcoming-shifts">0</h3>
+                            <p>Upcoming Shifts</p>
+                        </div>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <div class="stat-icon">✅</div>
+                        <div class="stat-content">
+                            <h3 id="coverage-rate">0%</h3>
+                            <p>Coverage Rate</p>
+                        </div>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <div class="stat-icon">⚠️</div>
+                        <div class="stat-content">
+                            <h3 id="unfilled-shifts">0</h3>
+                            <p>Unfilled Shifts</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="dashboard-content">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>Current Activations</h3>
+                        </div>
+                        <div class="card-body">
+                            <div id="current-activations">
+                                <p class="no-data">No active warming room activations</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>Upcoming Shifts (Next 24 Hours)</h3>
+                        </div>
+                        <div class="card-body">
+                            <div id="upcoming-shifts-list">
+                                <p class="no-data">No upcoming shifts</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Volunteers Section -->
+            <section id="volunteers-section" class="content-section">
+                <div class="page-header">
+                    <h2>Volunteer Management</h2>
+                    <div class="header-actions">
+                        <button class="btn btn-primary" onclick="showVolunteerForm()">
+                            Add Volunteer
+                        </button>
+                    </div>
+                </div>
+
+                <div class="filters">
+                    <select id="status-filter" onchange="filterVolunteers()">
+                        <option value="">All Statuses</option>
+                        <option value="active">Active</option>
+                        <option value="pending">Pending</option>
+                        <option value="inactive">Inactive</option>
+                    </select>
+                    <select id="skill-filter" onchange="filterVolunteers()">
+                        <option value="">All Skills</option>
+                        <option value="first_aid">First Aid</option>
+                        <option value="language">Language</option>
+                        <option value="medical">Medical</option>
+                        <option value="mental_health">Mental Health</option>
+                        <option value="leadership">Leadership</option>
+                    </select>
+                </div>
+
+                <div class="card">
+                    <div class="card-body">
+                        <div id="volunteers-table">
+                            <table class="data-table">
+                                <thead>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Email</th>
+                                        <th>Phone</th>
+                                        <th>Status</th>
+                                        <th>Skills</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="volunteers-tbody">
+                                    <!-- Volunteers will be loaded here -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Scheduling Section -->
+            <section id="scheduling-section" class="content-section">
+                <div class="page-header">
+                    <h2>Shift Scheduling</h2>
+                    <div class="header-actions">
+                        <button class="btn btn-primary" onclick="showShiftForm()">
+                            Create Shift
+                        </button>
+                        <button class="btn btn-secondary" onclick="generateShifts()">
+                            Generate Shifts
+                        </button>
+                    </div>
+                </div>
+
+                <div class="schedule-controls">
+                    <div class="date-picker">
+                        <label for="schedule-date">Date:</label>
+                        <input type="date" id="schedule-date" onchange="loadSchedule()">
+                    </div>
+                    <select id="activation-filter" onchange="loadSchedule()">
+                        <option value="">Select Activation</option>
+                        <!-- Activations loaded here -->
+                    </select>
+                </div>
+
+                <div id="schedule-grid" class="schedule-container">
+                    <!-- Schedule will be loaded here -->
+                </div>
+            </section>
+
+            <!-- Communications Section -->
+            <section id="communications-section" class="content-section">
+                <div class="page-header">
+                    <h2>Communications</h2>
+                    <div class="header-actions">
+                        <button class="btn btn-primary" onclick="showMessageForm()">
+                            Send Message
+                        </button>
+                    </div>
+                </div>
+
+                <div class="comm-grid">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>Send Notification</h3>
+                        </div>
+                        <div class="card-body">
+                            <form id="message-form">
+                                <div class="form-group">
+                                    <label for="message-type">Message Type</label>
+                                    <select id="message-type" required>
+                                        <option value="reminder">Shift Reminder</option>
+                                        <option value="alert">Alert</option>
+                                        <option value="update">General Update</option>
+                                    </select>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="recipients">Recipients</label>
+                                    <select id="recipients" required>
+                                        <option value="all_volunteers">All Volunteers</option>
+                                        <option value="shift_volunteers">Shift Volunteers</option>
+                                        <option value="coordinators">Coordinators</option>
+                                    </select>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="message-subject">Subject</label>
+                                    <input type="text" id="message-subject" required>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="message-body">Message</label>
+                                    <textarea id="message-body" rows="4" required></textarea>
+                                </div>
+                                
+                                <button type="submit" class="btn btn-primary">Send Message</button>
+                            </form>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>Recent Communications</h3>
+                        </div>
+                        <div class="card-body">
+                            <div id="recent-communications">
+                                <!-- Recent messages will be loaded here -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Reports Section -->
+            <section id="reports-section" class="content-section">
+                <div class="page-header">
+                    <h2>Reports & Analytics</h2>
+                </div>
+
+                <div class="reports-grid">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>Volunteer Hours</h3>
+                        </div>
+                        <div class="card-body">
+                            <canvas id="hours-chart"></canvas>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>Coverage Metrics</h3>
+                        </div>
+                        <div class="card-body">
+                            <div id="coverage-metrics">
+                                <!-- Metrics will be loaded here -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>Volunteer Activity</h3>
+                        </div>
+                        <div class="card-body">
+                            <div id="volunteer-activity">
+                                <!-- Activity data will be loaded here -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Modal for forms -->
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <span class="modal-close" onclick="closeModal()">&times;</span>
+            <div id="modal-body">
+                <!-- Modal content will be loaded here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Loading spinner -->
+    <div id="loading" class="loading hidden">
+        <div class="spinner"></div>
+    </div>
+
+    <!-- Toast notifications -->
+    <div id="toast-container" class="toast-container"></div>
+</body>
+</html>
