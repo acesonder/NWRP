@@ -9,6 +9,7 @@ room is activated and provides helpful information.
 
 import argparse
 import json
+import shutil
 import sys
 from datetime import datetime
 from pathlib import Path
@@ -27,8 +28,17 @@ class WarmingRoomStatus:
     def _load_status(self) -> Dict:
         """Load status from file or create default."""
         if self.STATUS_FILE.exists():
-            with open(self.STATUS_FILE, 'r') as f:
-                return json.load(f)
+            try:
+                with open(self.STATUS_FILE, 'r') as f:
+                    return json.load(f)
+            except json.JSONDecodeError as e:
+                print(f"⚠️  Warning: Corrupted status file detected. Creating fresh status.")
+                print(f"    Error: {e}")
+                # Backup the corrupted file
+                backup_file = self.STATUS_FILE.with_suffix('.json.backup')
+                shutil.copy(self.STATUS_FILE, backup_file)
+                print(f"    Corrupted file backed up to: {backup_file}")
+        
         return {
             "is_active": False,
             "last_updated": None,

@@ -1,5 +1,6 @@
 # Ignore warming room status data file (runtime generated)
 warming_room_status.json
+warming_room_status.json.backup
 
 # Python
 __pycache__/
